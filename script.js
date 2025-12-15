@@ -10,6 +10,7 @@ for ( let i = 0; i < gridNumber;i++){
    for ( let i = 0; i < gridNumber;i++){
        const square = document.createElement("div");
        square.classList.add("square");
+       square.setAttribute("data-opacity","0")
        row.appendChild(square);
    }
 }
@@ -29,9 +30,10 @@ if (gridNumberInput.value >= 1 && gridNumberInput.value <= 100){
         const row = document.createElement("div");
         row.classList.add("row");
         grid.appendChild(row);
-        for ( let i = 0; i < gridNumber;i++){
+        for ( let f = 0; f < gridNumber;f++){
             const square = document.createElement("div");
             square.classList.add("square");
+            square.setAttribute("data-opacity","0.3")
             row.appendChild(square);
    }
 }
@@ -43,9 +45,17 @@ if (gridNumberInput.value >= 1 && gridNumberInput.value <= 100){
 })
 
 
+// drawing on the board
+grid.addEventListener("mousemove",function(e){
+        if (e.target.classList.contains("square")){
+                    let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
+                    opacity += 0.1
+                    e.target.style.backgroundColor =`rgba(0 ,0 , 0, 1)`
+                    e.target.style.opacity = opacity.toString()
+                    e.target.setAttribute("data-opacity",opacity)
+                }
+            })
+        
 
-
-
-
-
+            
 
