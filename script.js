@@ -45,17 +45,60 @@ if (gridNumberInput.value >= 1 && gridNumberInput.value <= 100){
 })
 
 
+
+
+//rainbow color
+const rainbow = ["red","orange","yellow","green","blue","indigo","violet"]
+const rainbowButton = document.querySelector(".rainbow")
+function colorChange(){
+    grid.addEventListener("mousemove",function(){
+        let randomColor = Math.floor(Math.random() * rainbow.length)
+        colors = rainbow[randomColor]
+    }
+    )
+}
+rainbowButton.addEventListener("click",function(){
+    colorChange()
+})
+
+
+//selectinng color
+const colorPicker = document.querySelector("#color")
+let colors = colorPicker.value 
+colorPicker.addEventListener("change",function(){
+    colors = colorPicker.value 
+})
+
+
 // drawing on the board
 grid.addEventListener("mousemove",function(e){
         if (e.target.classList.contains("square")){
                     let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
                     opacity += 0.1
-                    e.target.style.backgroundColor =`rgba(0 ,0 , 0, 1)`
+                    e.target.style.backgroundColor = `${colors}`
                     e.target.style.opacity = opacity.toString()
                     e.target.setAttribute("data-opacity",opacity)
                 }
             })
         
+//reset board
+const reset = document.querySelector(".reset");
+reset.addEventListener("click",function(){
+        grid.innerHTML = "";
+
+    for ( let i = 0; i < gridNumber;i++){
+        const row = document.createElement("div");
+        row.classList.add("row");
+        grid.appendChild(row);
+        for ( let f = 0; f < gridNumber;f++){
+            const square = document.createElement("div");
+            square.classList.add("square");
+            square.setAttribute("data-opacity","0.3")
+            row.appendChild(square);
+   }
+}
+} )
+
 
             
 
