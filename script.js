@@ -38,40 +38,47 @@ if (gridNumberInput.value >= 1 && gridNumberInput.value <= 100){
 
 
 
+let colors = "black" 
+let isColorPicked = true;
 
 //rainbow color
 const rainbow = ["red","orange","yellow","green","blue","indigo","violet"]
 const rainbowButton = document.querySelector(".rainbow")
 function colorChange(){
     grid.addEventListener("mousemove",function(){
+         if (isColorPicked === false){
         let randomColor = Math.floor(Math.random() * rainbow.length)
         colors = rainbow[randomColor]
+    }   
     }
     )
 }
 rainbowButton.addEventListener("click",function(){
-    colorChange()
+    isColorPicked = false;
+    colorChange()  
 })
+
 
 
 //selectinng color
 const colorPicker = document.querySelector("#color")
-let colors = colorPicker.value 
-colorPicker.addEventListener("change",function(){
+colorPicker.addEventListener("change",function(e){
     colors = colorPicker.value 
+    isColorPicked = true;
+    console.log(isColorPicked)
 })
 
 
 // drawing on the board
 grid.addEventListener("mousemove",function(e){
-        if (e.target.classList.contains("square")){
-                    let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
-                    opacity += 0.1
-                    e.target.style.backgroundColor = `${colors}`
-                    e.target.style.opacity = opacity.toString()
-                    e.target.setAttribute("data-opacity",opacity)
-                }
-            })
+    if (e.target.classList.contains("square")){
+         let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
+         opacity += 0.1
+         e.target.style.backgroundColor = `${colors}`
+         e.target.style.opacity = opacity.toString()
+         e.target.setAttribute("data-opacity",opacity)
+         }
+     })
         
 //reset board
 const reset = document.querySelector(".reset");
@@ -79,6 +86,8 @@ reset.addEventListener("click",function(){
         grid.innerHTML = "";
         creatGrid();
 } )
+
+
 
 
             
