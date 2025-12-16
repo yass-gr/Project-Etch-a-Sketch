@@ -87,7 +87,37 @@ reset.addEventListener("click",function(){
         creatGrid();
 } )
 
+//shortcuts:
 
+//press enter to submit the grid number
+const enter = new Event("click");
+document.addEventListener("keypress",function(e){
+    if (e.key === "Enter"){
+        gridNumberButton.dispatchEvent(enter)
+    }
+})
+
+//press R to reset 
+document.addEventListener("keypress",function(e){
+    if (e.key === "r"){
+        reset.dispatchEvent(enter)
+    }
+})
+
+//press c for rainbow color
+document.addEventListener("keypress",function(e){
+    if (e.key === "c"){
+        rainbowButton.dispatchEvent(enter)
+    }
+})
+
+//press b for black color
+document.addEventListener("keypress",function(e){
+    if (e.key === "b"){
+        isColorPicked = true;
+        colors = "black"
+    }
+})
 
 
             
