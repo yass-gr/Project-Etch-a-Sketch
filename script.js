@@ -2,8 +2,10 @@
 // creating the grid
 let gridNumber = 16;
 const grid = document.querySelector(".grid");
+creatGrid();
 
-for ( let i = 0; i < gridNumber;i++){
+function creatGrid(){
+    for ( let i = 0; i < gridNumber;i++){
    const row = document.createElement("div");
    row.classList.add("row");
    grid.appendChild(row);
@@ -13,6 +15,7 @@ for ( let i = 0; i < gridNumber;i++){
        square.setAttribute("data-opacity","0")
        row.appendChild(square);
    }
+}
 }
 
 
@@ -25,18 +28,7 @@ if (gridNumberInput.value >= 1 && gridNumberInput.value <= 100){
     gridNumber = gridNumberInput.value;
     gridNumberInput.value = gridNumber;
     grid.innerHTML = "";
-
-    for ( let i = 0; i < gridNumber;i++){
-        const row = document.createElement("div");
-        row.classList.add("row");
-        grid.appendChild(row);
-        for ( let f = 0; f < gridNumber;f++){
-            const square = document.createElement("div");
-            square.classList.add("square");
-            square.setAttribute("data-opacity","0.3")
-            row.appendChild(square);
-   }
-}
+    creatGrid();
 }else {
     const alert = document.querySelector("span");
     alert.textContent = "you must enter a number between 1 and 100 inclusive!"
@@ -85,18 +77,7 @@ grid.addEventListener("mousemove",function(e){
 const reset = document.querySelector(".reset");
 reset.addEventListener("click",function(){
         grid.innerHTML = "";
-
-    for ( let i = 0; i < gridNumber;i++){
-        const row = document.createElement("div");
-        row.classList.add("row");
-        grid.appendChild(row);
-        for ( let f = 0; f < gridNumber;f++){
-            const square = document.createElement("div");
-            square.classList.add("square");
-            square.setAttribute("data-opacity","0.3")
-            row.appendChild(square);
-   }
-}
+        creatGrid();
 } )
 
 
