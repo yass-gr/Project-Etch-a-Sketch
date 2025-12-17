@@ -23,6 +23,7 @@ body{
     height: 30rem;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 .row{
     width: 100%;

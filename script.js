@@ -65,12 +65,54 @@ const colorPicker = document.querySelector("#color")
 colorPicker.addEventListener("change",function(e){
     colors = colorPicker.value 
     isColorPicked = true;
-    console.log(isColorPicked)
 })
 
 
+
+
+     
+
+
 // drawing on the board
-grid.addEventListener("mousemove",function(e){
+    function drawing(e){
+        if (isMousePressed && e.target){
+         if (e.target.classList.contains("square") ){
+         let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
+         opacity += 0.1
+         e.target.style.backgroundColor = `${colors}`
+         e.target.style.opacity = opacity.toString()
+         e.target.setAttribute("data-opacity",opacity)
+
+         }
+            }
+            
+        
+    }
+
+function startDrawing(){
+        isMousePressed = true;
+    
+  }
+
+function stopDrawing(e){
+            if (isMousePressed){
+                isMousePressed = false;
+            }
+    }
+
+
+
+function pressDrawing(){
+    document.addEventListener("mousedown",startDrawing);
+    document.addEventListener("mousemove",drawing);
+    document.addEventListener("mouseup",stopDrawing);
+}
+function removePressDrawing(){
+    document.removeEventListener("mousedown",startDrawing);
+    document.removeEventListener("mousemove",drawing);
+    document.removeEventListener("mouseup",stopDrawing);
+}
+function drawingLogic(e){
     if (e.target.classList.contains("square")){
          let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
          opacity += 0.1
@@ -78,7 +120,33 @@ grid.addEventListener("mousemove",function(e){
          e.target.style.opacity = opacity.toString()
          e.target.setAttribute("data-opacity",opacity)
          }
-     })
+     }
+
+function hoverDrawing(){
+    grid.addEventListener("mousemove",drawingLogic)
+}
+function removeHoverDrawing(){
+    grid.removeEventListener("mousemove",drawingLogic)
+}
+function actualDrawing(){
+    if (drawingMode === "hover"){
+    hoverDrawing()
+}else if (drawingMode === "press"){
+    pressDrawing()
+}
+}
+
+const modeSelect = document.querySelector("#mode");
+let drawingMode = modeSelect.value; 
+let isMousePressed = false;
+actualDrawing()
+
+modeSelect.addEventListener("change",function(){
+    removePressDrawing()
+    removeHoverDrawing()
+    drawingMode = modeSelect.value
+    actualDrawing()
+})
         
 //reset board
 const reset = document.querySelector(".reset");
@@ -118,7 +186,4 @@ document.addEventListener("keypress",function(e){
         colors = "black"
     }
 })
-
-
-            
 
