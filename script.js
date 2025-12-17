@@ -1,6 +1,6 @@
 
 // creating the grid
-let gridNumber = 16;
+let gridNumber = 64;
 const grid = document.querySelector(".grid");
 creatGrid();
 

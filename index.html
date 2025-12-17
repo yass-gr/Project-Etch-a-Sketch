@@ -8,20 +8,15 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="gridNumberInput">
+    <div class="allContainer">
+ <div class="top">
+           <div class="gridNumberInput">
         <label for="NumberInput">Grid number</label>
         <input id="NumberInput" type="number" placeholder="from 1 to 100">
         <button class="enterButton">Enter</button><br>
         <span></span>
     </div>
-    <div class="grid">
-
-    </div>
-    <div class="moreControls">
-        <input type="color" name="" id="color">
-        <button class="reset">Reset</button>
-        <button class="rainbow">Rainbow!</button>
-        <div class="mode">
+    <div class="mode">
             <label for="mode">Select drawing mode</label>
             <select name="mode" id="mode">
                 <option value="press">press</option>
@@ -29,6 +24,19 @@
                 
             </select>
         </div>
+ </div>
+    <div class="grid">
+
+    </div>
+    <div class="moreControls">
+        <div class="colorPicker">
+            <label for="color">Pick color</label>
+            <input type="color" name="" id="color">
+        </div>
+        <button class="reset">Reset</button>
+        <button class="rainbow">Rainbow!</button>
+        
+    </div>
     </div>
 </body>
 </html>
