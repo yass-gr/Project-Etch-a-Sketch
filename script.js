@@ -1,6 +1,7 @@
 
 // creating the grid
 let gridNumber = 64;
+let showgrid = false;
 const grid = document.querySelector(".grid");
 creatGrid();
 
@@ -13,6 +14,9 @@ function creatGrid(){
        const square = document.createElement("div");
        square.classList.add("square");
        square.setAttribute("data-opacity","0")
+       if (showgrid){
+       square.setAttribute("style","border: 0.2px solid rgba(0, 0, 0, 0.151);")
+       }
        row.appendChild(square);
    }
 }
@@ -20,20 +24,42 @@ function creatGrid(){
 
 
 //input for the grid number
+
 const gridNumberButton = document.querySelector(".enterButton");
 const gridNumberInput = document.querySelector("#NumberInput");
 gridNumberInput.value = gridNumber
 gridNumberButton.addEventListener("click", function(){
+const alert = document.querySelector("span");
+alert.textContent = ""
 if (gridNumberInput.value >= 1 && gridNumberInput.value <= 100){
     gridNumber = gridNumberInput.value;
     gridNumberInput.value = gridNumber;
     grid.innerHTML = "";
     creatGrid();
 }else {
-    const alert = document.querySelector("span");
+    
     alert.textContent = "you must enter a number between 1 and 100 inclusive!"
     alert.style.color = "red"
+
    }
+
+})
+
+//changing grid number with range input
+const rangeText1 = document.querySelector(".r1")
+const rangeText2 = document.querySelector(".r2")
+const range = document.querySelector("#range")
+rangeText1.textContent = gridNumber
+rangeText2.textContent = gridNumber
+
+range.addEventListener("input",function(){
+    rangeText1.textContent = range.value;
+    rangeText2.textContent = rangeText1.textContent;
+    gridNumber = range.value;
+    gridNumberInput.value = gridNumber
+    grid.innerHTML = "";
+    creatGrid();
+    
 })
 
 
@@ -77,7 +103,7 @@ colorPicker.addEventListener("change",function(e){
     function drawing(e){
         if (isMousePressed && e.target){
          if (e.target.classList.contains("square") ){
-         let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
+         let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.5
          opacity += 0.1
          e.target.style.backgroundColor = `${colors}`
          e.target.style.opacity = opacity.toString()
@@ -114,7 +140,7 @@ function removePressDrawing(){
 }
 function drawingLogic(e){
     if (e.target.classList.contains("square")){
-         let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.3
+         let opacity = parseFloat(e.target.getAttribute("data-opacity")) || 0.5
          opacity += 0.1
          e.target.style.backgroundColor = `${colors}`
          e.target.style.opacity = opacity.toString()
@@ -155,6 +181,14 @@ reset.addEventListener("click",function(){
         creatGrid();
 } )
 
+//eraser
+const eraser = document.querySelector(".eraser")
+eraser.addEventListener("click",function()  {
+    isColorPicked = true
+    colors = "white"
+   
+})
+
 //shortcuts:
 
 //press enter to submit the grid number
@@ -174,7 +208,7 @@ document.addEventListener("keypress",function(e){
 
 //press c for rainbow color
 document.addEventListener("keypress",function(e){
-    if (e.key === "c"){
+    if (e.key === "w"){
         rainbowButton.dispatchEvent(enter)
     }
 })
@@ -187,3 +221,16 @@ document.addEventListener("keypress",function(e){
     }
 })
 
+
+
+//grid input
+const gridCheckbox = document.querySelector("#showGrid")
+gridCheckbox.addEventListener("change",function(){
+    if (gridCheckbox.checked){
+        showgrid = true
+    }else{
+        showgrid = false
+    }
+    grid.innerHTML = "";
+    creatGrid();
+})

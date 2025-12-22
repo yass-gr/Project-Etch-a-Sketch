@@ -6,13 +6,14 @@
     <title>Etch-a-Sketch</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class="allContainer">
  <div class="top">
            <div class="gridNumberInput">
         <label for="NumberInput">Grid number</label>
-        <input id="NumberInput" type="number" placeholder="from 1 to 100">
+        <input id="NumberInput" type="number" value="0">
         <button class="enterButton">Enter</button><br>
         <span></span>
     </div>
@@ -33,10 +34,25 @@
             <label for="color">Pick color</label>
             <input type="color" name="" id="color">
         </div>
-        <button class="reset">Reset</button>
-        <button class="rainbow">Rainbow!</button>
+        <button class="reset"> <i class='bxr  bx-trash-alt'></i> Reset</button>
+        <button class="rainbow"> <i class='bxr  bx-rainbow'></i> Rainbow!</button>
+        <button class="eraser"><i class='bxr  bx-eraser'></i> Eraser</button>
+        <div class="isGrid">
+            <label for="grid">grid</label>
+            <input type="checkbox" name="" id="showGrid">
+            
+        </div>
         
     </div>
+    <div class="range">
+        <input id="range" class="rangeinput" type="range" min="1" max="100" value="0">
+        
+    </div>
+        <div class="rangetext">
+                <p class="r1"></p>
+                <p style="font-size: large;">×</p>
+                <p class="r2"></p>
+        </div>
     </div>
 </body>
 </html>
